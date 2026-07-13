@@ -14,43 +14,13 @@ Au-delà de la veille elle-même, le projet s'inscrit dans une démarche de tran
 
 ---
 
-# 🎯 Objectifs
+# 📚 Documentation
 
-Le projet poursuit plusieurs objectifs :
+La documentation du projet est organisée autour de trois documents principaux :
 
-- Suivre l'évolution de la représentation des jeunesses dans les médias français.
-- Produire des indicateurs fiables et des analyses dans le temps.
-- Alimenter la recherche, le débat public et les actions de plaidoyer.
-- Développer une méthodologie documentée, transparente et reproductible.
-- Construire progressivement des outils ouverts autour de cette veille.
-
----
-
-# ⚙️ Fonctionnement général
-
-Le pipeline de la veille repose sur plusieurs grandes étapes :
-
-1. Sélection des sources
-2. Collecte automatisée des publications
-3. Analyse par intelligence artificielle
-4. Traitement et consolidation des données
-5. Production des indicateurs et visualisations
-6. Validation méthodologique et amélioration continue
-
-La documentation détaillée de chaque étape est disponible dans les différents documents du dépôt.
-
----
-
-# 📂 Organisation du dépôt
-
-Ce dépôt rassemble progressivement :
-
-- la documentation du projet ;
-- la méthodologie ;
-- les rapports produits ;
-- les prompts utilisés ;
-- les catégories d'analyse ;
-- des exemples de classification.
+- 📖 [Projet](docs/project.md)
+- ⚙️ [Méthodologie](docs/methodology.md)
+- ✅ [Validation](docs/validation.md)
 
 ---
 
@@ -59,18 +29,6 @@ Ce dépôt rassemble progressivement :
 🟢 Projet en production depuis **novembre 2025**.
 
 La documentation est actuellement en cours de restructuration afin d'améliorer la transparence du projet et de préparer son ouverture progressive.
-
----
-
-# 🗺️ Feuille de route
-
-Parmi les prochaines étapes :
-
-- Finaliser la documentation méthodologique.
-- Publier progressivement les prompts.
-- Renforcer les protocoles de validation.
-- Mettre en ligne une IA conversationnelle permettant d'explorer les résultats.
-- Constituer un comité scientifique pour accompagner l'évolution de la méthodologie.
 
 ---
 
