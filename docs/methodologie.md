@@ -36,12 +36,6 @@ Objectif : permettre à un lecteur extérieur de comprendre **ce qui est analys�
 6. **Visualisation**  
    Alimentation d’un tableau final et d’un dashboard (baromètre, suivis temporels, répartitions, etc.).
 
-7. **Validation**  
-   Protocoles de contrôle qualité (revue humaine, campagnes d’annotation, métriques).  
-   **À compléter** : la page projet mentionne cette brique, mais les métriques/protocoles détaillés ne sont pas renseignés dans les éléments actuellement consolidés.
-
-8. **Limites et évolutions**  
-   Limites de corpus, limites LLM, biais potentiels, et axes d’amélioration (techniques + validation).
 
 ---
 
@@ -73,20 +67,20 @@ Le pipeline analyse des **publications issues de médias**, collectées via des 
 
 **Champs effectivement analysés par l’IA (contenu textuel) :**
 - **Titre**
-- **Description / extrait** (selon ce que fournit la source)
+- **Description**
 
 > Important : l’IA n’analyse **pas** l’audio, ni le contenu vidéo lui-même. La classification repose sur les **champs textuels** disponibles.
 
 ### 1.2 Quels réseaux sociaux / plateformes ?
 
-- **Instagram** (périmètre explicitement documenté à ce stade)
+- **Instagram** (périmètre explicitement documenté à ce stade), dans un premier temps.
 
 
 ### 1.3 Combien de médias sont suivis ?
 
-- **65 médias** différents sont suivis (périmètre opérationnel actuel)
+- **69 médias** différents sont suivis (périmètre opérationnel actuel), qui cummulent plus de 50 millions d'abonnés, la liste nominale des 69 médias est disponible sur le fichier 'liste de médias' avec la méthodologie de sélection.
 
-#### Répartition par type de média (65)
+#### Répartition par type de média (69)
 
 | Type de média | Nombre |
 |---|---:|
@@ -99,22 +93,13 @@ Le pipeline analyse des **publications issues de médias**, collectées via des 
 | Magazine | 3 |
 | Web | 1 |
 
-> La liste nominale des 65 médias est disponible sur demande.
 
 ### 1.4 Quelle volumétrie ?
 
 - **~9000 publications Instagram / mois** (ordre de grandeur)
 
-### 1.5 Quels types de contenus sont analysés ?
 
-- Publications Instagram de médias (au sens “posts”/publications, via les informations textuelles associées)
-- Le pipeline est conçu pour fonctionner sur des items courts (titre/extrait) et produire :
-  - un indicateur “lié aux jeunesses” (binaire),
-  - une thématique,
-  - un récit/tonalité,
-  - des justifications.
-
-### 1.6 Limites du corpus (structurelles)
+### 1.5 Limites du corpus (structurelles)
 
 **Limites liées aux plateformes et aux champs :**
 - Analyse limitée aux **champs textuels** fournis par la source (titre/description/extrait).
@@ -123,8 +108,8 @@ Le pipeline analyse des **publications issues de médias**, collectées via des 
   - des **ambiguïtés** (ironie, références culturelles, contexte absent du texte).
 
 **Limites liées au périmètre médias :**
-- Le corpus reflète **uniquement les 65 médias configurés**.
-- Les résultats ne doivent pas être interprétés comme “les médias français” au sens exhaustif.
+- Le corpus reflète **les 65 médias configurés**.
+- Les résultats ne doivent pas être interprétés comme  “la totalité des médias français” au sens exhaustif.
 
 **Limites liées à la collecte (RSS) :**
 - La qualité/complétude dépend de la **disponibilité et du format** des flux RSS et de la plateforme de collecte.
@@ -166,19 +151,10 @@ Objectif de cette cadence :
 - éviter les “trous” de collecte (ne pas louper de publications) tout en restant réaliste opérationnellement.
 
 
-
-**À compléter :**
-- critères d’inclusion (type de média, audience, orientation éditoriale, etc.) ;
-- procédure de QA à l’ajout (checklist, tests de non-régression, validation manuelle).
-
-### 2.5 Automatisation (état actuel)
+### 2.4 Automatisation (état actuel)
 
 - La collecte est aujourd’hui **semi-automatisée** (infrastructure RSS + outil), mais le déclenchement reste **manuel**.
 
-**À compléter :**
-- si une automatisation complète est prévue (cron/scheduler, triggers) ;
-- gestion des erreurs (sources en échec, flux indisponible, retry) ;
-- monitoring (logs, alerting).
 
 ---
 
@@ -191,10 +167,6 @@ Cette section documente **la brique principale** : comment un LLM transforme des
 Modèle mentionné dans la documentation projet :
 - **OpenAI — “Mini 4o”**
 
-**À compléter :**
-- version exacte / identifiant modèle côté API ;
-- paramètres d’inférence (temperature, max tokens, top_p, etc.) ;
-- politique de mise à jour (quand/ pourquoi changer de modèle).
 
 ### 3.2 Architecture générale (logique de traitement)
 
@@ -225,10 +197,6 @@ Les prompts sont écrits pour :
 - lister des **erreurs fréquentes** et des garde-fous,
 - demander une décision **binaire/unique** (éviter les sorties ambiguës).
 
-**À compléter :**
-- organisation des prompts (fichiers, versioning, templates) ;
-- stratégie de “prompt chaining” (un prompt par tâche vs prompt unique) ;
-- mécanismes de fallback (ré-essais, re-prompting).
 
 ### 3.4 Classification “Jeunesses” (binaire)
 
@@ -275,11 +243,8 @@ Déterminer le sentiment / perspective exprimée à l’égard des jeunes dans l
 - `Positif`
 - `Négatif`
 - `Neutre`
-- `N/A`
+- `N/A` si la publication n'est pas lié aux jeunesses
 
-**À compléter :**
-- définitions opérationnelles (comment distinguer Neutre vs N/A),
-- règles sur les titres factuels, ironiques, ou très courts.
 
 ### 3.7 Justifications générées
 
@@ -302,13 +267,13 @@ Pour chaque décision, le pipeline produit une **justification textuelle**, afin
 Le format d’export inclut (au minimum) :
 
 - `Nom de la source`
-- `Retrieved At`
+- `Récupéré le`
 - `Publié à`
 - `Source` (média)
 - `Type de média`
 - `Tittre`
 - `URL`
-- `Excerpt`
+- `Extrait`
 - `Présence des jeunesses`
 - `Présence des jeunesses Justification`
 - `Thématique`
@@ -316,8 +281,6 @@ Le format d’export inclut (au minimum) :
 - `Le récit`
 - `Le récit Justification`
 
-
-> Remarque : les colonnes “Tonalité émotionnelle” apparaissent dans le tableau d’exemple mais ne sont pas documentées ailleurs. À clarifier : est-ce une dimension effectivement produite, ou un champ prévu/non rempli ?
 
 ---
 
@@ -332,13 +295,8 @@ Les exports contiennent :
 
 ### 4.2 Format
 
-Format observé :
-- **Excel** (
+Format : **Excel** 
 
-**À compléter :**
-- convention de nommage (date, source, version),
-- encodage / séparateurs (si CSV en alternative),
-- dossier/endpoint de sortie (Drive/SharePoint/GitHub Releases).
 
 ### 4.3 Structure tabulaire
 
@@ -348,11 +306,11 @@ La structure est un tableau “1 ligne = 1 item analysé”, avec des colonnes s
 
 ## 5. Traitement des données
 
-Le traitement consolide les exports IA pour produire un jeu de données “master” et des indicateurs. Un **Excel master (SharePoint)** est utilisé comme point de centralisation.
+Le traitement consolide les exports IA pour produire un jeu de données “master” et des indicateurs. Un **Excel master** est utilisé comme point de centralisation.
 
 ### 5.1 Pipeline Excel / Power Query (attendu)
 
-Étapes typiques (à documenter précisément une fois la logique confirmée) :
+Étapes:
 1. **Import** des exports IA (Excel) dans Power Query.
 2. **Nettoyage** (types, champs vides, titres tronqués, dates).
 3. **Normalisation** (noms médias, types de médias, formats de date, URLs).
@@ -360,12 +318,6 @@ Le traitement consolide les exports IA pour produire un jeu de données “maste
 5. **Historisation** (conserver les versions / cycles de collecte).
 6. **Calcul d’indicateurs** (agrégations, ratios, séries temporelles).
 7. **Sortie** vers table “finale” alimentant le dashboard.
-
-**À compléter (indispensable) :**
-- clés de dédoublonnage retenues,
-- règles d’historisation (append-only vs overwrite),
-- gestion des corrections manuelles,
-- contrôles qualité (lignes rejetées, anomalies).
 
 ---
 
@@ -381,45 +333,118 @@ Exemples d’indicateurs typiquement attendus (à confirmer, ne pas considérer 
 - évolution temporelle (semaine/mois)
 - comparaisons par type de média / média
 
-### 6.2 Tableau final & dashboard
+### 6.2 Tableau final & dashboard (à date)
 
-Éléments mentionnés :
-- **Dashboard principal : à compléter**
-- **Baromètre visuel : à compléter**
+Éléments en interne :
+- **Dashboard principal**
+- **Tableau final**
 
-**À compléter :**
-- outil de dashboard (Excel, Power BI, autre),
-- vues principales,
-- définitions des filtres (période, média, type, thématique),
-- usages cibles (plaidoyer, sensibilisation, suivi interne).
+Éléments partagé en externe:
+- **Brief mensuel**
+- **Baromètre visuel**
 
 ---
 
-## 7. Validation
+## 7. Validation et amélioration continue
 
-La validation vise à mesurer et améliorer la qualité des classifications IA.
+La VeilleMedIA Jeunesses s'inscrit dans une démarche d'amélioration continue. Depuis le lancement du prototype, plusieurs campagnes de validation ont été menées afin d'évaluer la qualité des classifications produites par l'IA, d'identifier les erreurs récurrentes et d'améliorer progressivement les prompts ainsi que les catégories d'analyse.
 
-### 7.1 Protocoles existants
+Ces campagnes ne sont **pas réalisées de manière systématique** à chaque exécution de la veille. Elles interviennent lors des principales évolutions du prototype ou de la méthodologie, dans une logique d'itération continue.
 
-État dans la documentation disponible :
-- section “Contrôle qualité (revue humaine, métriques)” présente mais **non renseignée**.
-- mention d’un besoin de définir : échantillons, métriques (precision/recall/F1), matrice de confusion, faux positifs/négatifs.
+---
+
+### 7.1 Historique des campagnes de validation
+
+À ce jour, **trois campagnes de validation** ont été réalisées.
 
 
-### 7.2 Campagnes d’annotation humaine
+**Décembre 2025 — Première revue exploratoire**
 
-**À compléter :**
-- qui annote (rôles),
-- guide d’annotation,
-- process de désaccord (double annotation, arbitrage),
-- stockage des labels “gold”.
+Un mois après le lancement du prototype, une première revue qualitative a été réalisée.
 
-### 7.3 Résultats & améliorations successives
+Cette première étape n'avait pas vocation à mesurer précisément les performances du système, mais à identifier les erreurs les plus fréquentes produites par l'IA.
 
-**À compléter :**
-- résultats quantitatifs (si disponibles),
-- principaux cas d’erreur,
-- itérations sur prompts/règles.
+Deux bénévoles ont parcouru un ensemble de classifications afin d'observer les principaux problèmes rencontrés, notamment :
+
+- erreurs de détection des contenus liés aux jeunesses ;
+- ambiguïtés dans certaines catégories ;
+- classifications incohérentes ou peu pertinentes.
+
+Les observations recueillies ont servi de base aux premières améliorations des prompts et de la logique de classification.
+
+> **Remarque :** cette première campagne n'a pas fait l'objet d'un protocole formalisé ni d'une mesure quantitative comparable aux campagnes suivantes. Elle constitue une première étape exploratoire dans le développement du prototype.
+
+---
+
+**Mars 2026 — Première campagne de validation quantitative**
+
+Une seconde campagne de validation a été menée selon une méthodologie plus structurée.
+
+Un échantillon de publications a été annoté indépendamment par plusieurs annotateurs humains avant d'être comparé :
+
+- entre les annotateurs eux-mêmes ;
+- avec les classifications produites par l'IA.
+
+Cette campagne a permis de :
+
+- mesurer les performances du système sur un jeu de données défini ;
+- identifier les principales sources d'erreur ;
+- améliorer les prompts ;
+- affiner certaines catégories d'analyse.
+
+Les résultats obtenus ont conduit à une diminution significative du taux d'erreur observé.
+
+---
+
+**Juillet 2026 — Validation de confirmation**
+
+Une troisième campagne de validation a été réalisée selon une méthodologie similaire afin d'évaluer les améliorations apportées depuis la campagne précédente.
+
+Cette nouvelle revue a permis :
+
+- de confirmer les progrès réalisés ;
+- d'identifier de nouveaux cas limites ;
+- de poursuivre l'amélioration des prompts et des classifications.
+
+---
+
+### 7.2 Méthodologie de validation
+
+Les campagnes de validation reposent sur les étapes suivantes :
+
+1. Constitution d'un échantillon de publications.
+2. Annotation indépendante par plusieurs annotateurs.
+3. Comparaison des annotations humaines.
+4. Comparaison entre les annotations humaines et les résultats produits par l'IA.
+5. Identification des erreurs récurrentes.
+6. Amélioration des prompts, des catégories et de la logique de classification.
+
+Cette démarche permet d'améliorer progressivement la robustesse du système tout en documentant les principales limites observées.
+
+---
+
+### 7.3 Résultats
+
+Les résultats détaillés de chaque campagne de validation sont présentés ci-dessous.
+
+Cette section a vocation à regrouper notamment :
+
+- le taux d'erreur global observé ;
+- les principaux types d'erreurs identifiés ;
+- les évolutions du système après chaque campagne ;
+- les améliorations obtenues entre deux validations.
+
+**À compléter.**
+
+---
+
+### 7.4 Limites
+
+Les campagnes de validation restent **ponctuelles** et ne constituent pas un contrôle qualité systématique de l'ensemble des classifications produites par la veille.
+
+Par ailleurs, certaines dimensions de l'analyse — notamment l'identification des récits ou la catégorisation de certains contenus — comportent une part d'interprétation susceptible de conduire à des divergences entre annotateurs humains.
+
+L'objectif de cette démarche n'est donc pas d'obtenir une classification parfaite, mais d'améliorer continuellement la cohérence, la transparence et la robustesse méthodologique du système.
 
 ---
 
