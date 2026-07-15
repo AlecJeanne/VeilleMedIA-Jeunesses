@@ -22,7 +22,7 @@ Objectif : permettre à un lecteur extérieur de comprendre **ce qui est analys�
 3. **Analyse IA**  
    Pour chaque item collecté (ex. publication Instagram), un modèle LLM produit des **classifications** et **justifications** à partir des champs textuels disponibles (titre/description).  
    À ce stade, le pipeline réalise notamment :
-   - Détection “**lié aux jeunesses** / non lié”
+   - Détection si la pu lication est “**lié aux jeunesses / non lié”**
    - Attribution d’une **thématique**
    - Attribution d’un **récit** (ex. Positif / Négatif / Neutre / N/A)
    - Génération d’**explications** (justifications / rationales) associées à chaque décision
