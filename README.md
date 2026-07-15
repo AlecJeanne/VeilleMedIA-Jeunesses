@@ -18,8 +18,8 @@ Au-delà de la veille elle-même, le projet s'inscrit dans une démarche de tran
 
 La documentation du projet est organisée autour de trois documents principaux :
 
-- 📖 [Projet](docs/project.md)
-- ⚙️ [Méthodologie](docs/methodology.md)
+- 📖 [Vue d'ensemble](docs/vue d'ensemble.md)
+- ⚙️ [Méthodologie](docs/methodologie.md)
 - ✅ [Validation](docs/validation.md)
 
 ---
