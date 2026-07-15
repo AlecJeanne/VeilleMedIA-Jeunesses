@@ -351,7 +351,6 @@ La VeilleMedIA Jeunesses s'inscrit dans une démarche d'amélioration continue. 
 
 Ces campagnes ne sont **pas réalisées de manière systématique** à chaque exécution de la veille. Elles interviennent lors des principales évolutions du prototype ou de la méthodologie, dans une logique d'itération continue.
 
----
 
 ### 7.1 Historique des campagnes de validation
 
@@ -374,7 +373,6 @@ Les observations recueillies ont servi de base aux premières améliorations des
 
 > **Remarque :** cette première campagne n'a pas fait l'objet d'un protocole formalisé ni d'une mesure quantitative comparable aux campagnes suivantes. Elle constitue une première étape exploratoire dans le développement du prototype.
 
----
 
 **Mars 2026 — Première campagne de validation quantitative**
 
@@ -394,7 +392,6 @@ Cette campagne a permis de :
 
 Les résultats obtenus ont conduit à une diminution significative du taux d'erreur observé.
 
----
 
 **Juillet 2026 — Validation de confirmation**
 
@@ -406,7 +403,6 @@ Cette nouvelle revue a permis :
 - d'identifier de nouveaux cas limites ;
 - de poursuivre l'amélioration des prompts et des classifications.
 
----
 
 ### 7.2 Méthodologie de validation
 
@@ -421,7 +417,6 @@ Les campagnes de validation reposent sur les étapes suivantes :
 
 Cette démarche permet d'améliorer progressivement la robustesse du système tout en documentant les principales limites observées.
 
----
 
 ### 7.3 Résultats
 
@@ -436,7 +431,6 @@ Cette section a vocation à regrouper notamment :
 
 **À compléter.**
 
----
 
 ### 7.4 Limites
 
