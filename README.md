@@ -34,4 +34,4 @@ La documentation est actuellement en cours de restructuration afin d'améliorer 
 
 # 📬 Contact
 
-Pour toute question ou proposition de collaboration, n'hésitez pas à contacter l'équipe du projet: Alec Jeanne (ajeanne@ashok.org)
+Pour toute question ou proposition de collaboration, n'hésitez pas à contacter le chargé de projet: Alec Jeanne (ajeanne@ashok.org)
