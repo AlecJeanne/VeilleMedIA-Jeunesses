@@ -39,9 +39,10 @@ Objectif : permettre à un lecteur extérieur de comprendre **ce qui est analys�
 
 ---
 
-### Schéma (Mermaid)
+### Schéma
 
-à compélter
+Voir le document schéma en dessous de docs qui détaille le fonctionnement de la veille.
+
 
 ---
 
